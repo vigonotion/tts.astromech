@@ -8,7 +8,13 @@ Platform | Description
 
 ## Installation using HACS
 
-TODO
+This component is available via HACS as a [custom repository](https://hacs.xyz/docs/faq/custom_repositories) which is the recommended method of installation.
+
+1. Add custom repository to HACS
+1. Search for "Astromech"
+1. Install integration
+1. Restart Home Assistant
+1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Astromech TTS"
 
 ## Manual Installation
 
@@ -18,11 +24,8 @@ TODO
 1. Download _all_ the files from the `custom_components/astromech/` directory (folder) in this repository.
 1. Place the files you downloaded in the new directory (folder) you created.
 1. Restart Home Assistant
-1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Integration blueprint"
+1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Astromech TTS"
 
-## Configuration is done in the UI
-
-TODO
 
 ## Contributions are welcome!
 
