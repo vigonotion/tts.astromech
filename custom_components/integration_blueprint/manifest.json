@@ -1,12 +1,12 @@
 {
-  "domain": "integration_blueprint",
+  "domain": "astromech",
   "name": "Integration blueprint",
   "codeowners": [
     "@ludeeus"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/ludeeus/integration_blueprint",
+  "documentation": "https://github.com/ludeeus/astromech",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/ludeeus/integration_blueprint/issues",
+  "issue_tracker": "https://github.com/ludeeus/astromech/issues",
   "version": "0.0.0"
 }
