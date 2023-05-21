@@ -1,5 +1,5 @@
 {
-    "name": "Integration blueprint",
+    "name": "Astromech TTS (R2D2 Sounds)",
     "filename": "astromech.zip",
     "hide_default_branch": true,
     "homeassistant": "2023.5.0",
