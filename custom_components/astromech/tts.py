@@ -1,8 +1,10 @@
+"""Astromech TTS component."""
+
 import io
 from typing import Any
 from homeassistant.components import tts
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 import re
@@ -10,12 +12,11 @@ import random
 import string
 import wave
 
-from .const import DOMAIN
 from ttastromech import TTAstromech
 
 
 def replace_non_alpha_chars(text):
-    """Replace invalid characters with a random lowercase ascii letter"""
+    """Replace invalid characters with a random lowercase ascii letter."""
 
     random_char = lambda: random.choice(string.ascii_lowercase)
 
@@ -40,6 +41,7 @@ class TextToAstromech(tts.TextToSpeechEntity):
     """Represent a Text To Speech entity."""
 
     def __init__(self) -> None:
+        """Init."""
         self._r2 = TTAstromech()
 
         self._attr_name = "Astromech"
@@ -47,10 +49,12 @@ class TextToAstromech(tts.TextToSpeechEntity):
 
     @property
     def supported_languages(self) -> list[str]:
+        """Return a list of supported languages."""
         return ["en", "de", "pl", "es", "it", "fr", "pt", "hi"]  # TODO return all
 
     @property
     def default_language(self) -> str:
+        """Returns the default language."""
         return "en"
 
     @property
