@@ -2,7 +2,7 @@
     "name": "Integration blueprint",
     "filename": "astromech.zip",
     "hide_default_branch": true,
-    "homeassistant": "2023.3.0",
+    "homeassistant": "2023.5.0",
     "render_readme": true,
     "zip_release": true
 }

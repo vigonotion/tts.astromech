@@ -1,0 +1,15 @@
+{
+  "domain": "astromech",
+  "name": "Astromech TTS (R2D2 Sounds)",
+  "codeowners": [
+    "@vigonotion"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/vigonotion/tts.astromech",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/vigonotion/tts.astromech/issues",
+  "version": "0.0.0",
+  "requirements": [
+    "ttastromech==0.6.0"
+  ]
+}
