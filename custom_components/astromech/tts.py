@@ -4,15 +4,38 @@ import io
 from typing import Any
 from homeassistant.components import tts
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.components.tts.models import Voice
 
 import re
 import random
 import string
 import wave
+import hashlib
 
 from ttastromech import TTAstromech
+
+from .const import VOICE_ASTROMECH, VOICE_ASTROMECH_SHORT
+
+
+def generate_hash(input, length):
+    """Generate hash."""
+    md5_hash = hashlib.md5(input.encode()).hexdigest()
+    hash_length = len(md5_hash)
+    ratio = hash_length / length
+    result = ""
+
+    for i in range(length):
+        start = int(i * ratio)
+        end = int((i + 1) * ratio)
+        substring = md5_hash[start:end]
+        ascii_sum = sum(ord(c) for c in substring)
+        char_index = ascii_sum % 26
+        char = chr(ord("a") + char_index)
+        result += char
+
+    return result
 
 
 def replace_non_alpha_chars(text):
@@ -62,11 +85,23 @@ class TextToAstromech(tts.TextToSpeechEntity):
         """Return a list of supported options."""
         return [tts.ATTR_VOICE]
 
+    @callback
+    def async_get_supported_voices(self, language: str) -> list[Voice] | None:
+        """Return a list of supported voices for a language."""
+        return [
+            Voice(VOICE_ASTROMECH, "Astromech"),
+            Voice(VOICE_ASTROMECH_SHORT, "Astromech (short)"),
+        ]
+
     def get_tts_audio(
         self, message: str, language: str, options: dict[str, Any] | None = None
     ) -> tts.TtsAudioType:
         """Load tts audio file from the engine."""
         slug = replace_non_alpha_chars(message.lower())
+
+        if options.get("voice") == VOICE_ASTROMECH_SHORT:
+            slug = generate_hash(message.lower(), 6)
+
         data = self._r2.generate(slug)
 
         output_stream = io.BytesIO()

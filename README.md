@@ -1,10 +1,13 @@
 # Text to Astromech integration for Home Assistant (R2D2 Beep Boop Sounds)
 
-**This integration will set up the following platforms**
+Generate Astromech sounds in Home Assistant!
 
-Platform | Description
--- | --
-`tts` | Generate astromech sounds and play them on supported media players
+You have the choice between these voices:
+
+- __Astromech__: Each letter in your TTS message is assigned to a sound. You can check the sounds here: https://github.com/MomsFriendlyRobotCompany/ttastromech/tree/master/ttastromech/sounds
+- __Astromech (short)__: The TTS message gets hashed into a 6 letter word, which is then forwarded to the Astromech voice. This helps with long TTS messages that are generated for example by Assist.
+
+***
 
 ## Installation using HACS
 
@@ -32,3 +35,9 @@ This component is available via HACS as a [custom repository](https://hacs.xyz/d
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md)
 
 ***
+
+## Special thanks
+
+- `ttastromech` for the awesome python library: https://github.com/MomsFriendlyRobotCompany/ttastromech
+- https://github.com/hug33k/PyTalk-R2D2 on which `ttastromech` is based on
+- Leylosh's Scratch project for the sounds used by the libraries above (https://scratch.mit.edu/projects/766189/)

@@ -7,3 +7,6 @@ NAME = "Astromech TTS (R2D2 Sounds)"
 DOMAIN = "astromech"
 VERSION = "0.0.0"
 ATTRIBUTION = ""
+
+VOICE_ASTROMECH = "astromech"
+VOICE_ASTROMECH_SHORT = "astromech_short"
