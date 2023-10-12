@@ -109,18 +109,17 @@ class TextToAstromech(tts.TextToSpeechEntity):
 
         data = self._r2.generate(slug)
 
+        output_stream = io.BytesIO()
+        output_file = wave.open(output_stream, "wb")
+        output_file.setnchannels(1)  # mono
+        output_file.setsampwidth(2)  # 16 bits
+        output_file.setframerate(22050)  # Hz
+        output_file.writeframes(data)
+        output_file.close()
+
+        # Read the content of the byte stream into a byte array
+        byte_array = output_stream.getvalue()
+
         if options[tts.ATTR_AUDIO_OUTPUT] == "wav":
-            output_stream = io.BytesIO()
-            output_file = wave.open(output_stream, "wb")
-            output_file.setnchannels(1)  # mono
-            output_file.setsampwidth(2)  # 16 bits
-            output_file.setframerate(22050)  # Hz
-            output_file.writeframes(data)
-            output_file.close()
-
-            # Read the content of the byte stream into a byte array
-            byte_array = output_stream.getvalue()
-
             return ("wav", byte_array)
-
-        return ("raw", data)
+        return ("raw", byte_array)
