@@ -83,7 +83,12 @@ class TextToAstromech(tts.TextToSpeechEntity):
     @property
     def supported_options(self) -> list[str]:
         """Return a list of supported options."""
-        return [tts.ATTR_VOICE]
+        return [tts.ATTR_AUDIO_OUTPUT, tts.ATTR_VOICE]
+
+    @property
+    def default_options(self):
+        """Return a dict include default options."""
+        return {tts.ATTR_AUDIO_OUTPUT: "wav"}
 
     @callback
     def async_get_supported_voices(self, language: str) -> list[Voice] | None:
@@ -94,12 +99,12 @@ class TextToAstromech(tts.TextToSpeechEntity):
         ]
 
     def get_tts_audio(
-        self, message: str, language: str, options: dict[str, Any] | None = None
+        self, message: str, language: str, options: dict[str, Any]
     ) -> tts.TtsAudioType:
         """Load tts audio file from the engine."""
         slug = replace_non_alpha_chars(message.lower())
 
-        if options.get("voice") == VOICE_ASTROMECH_SHORT:
+        if options.get(tts.ATTR_VOICE) == VOICE_ASTROMECH_SHORT:
             slug = generate_hash(message.lower(), 6)
 
         data = self._r2.generate(slug)
@@ -115,4 +120,6 @@ class TextToAstromech(tts.TextToSpeechEntity):
         # Read the content of the byte stream into a byte array
         byte_array = output_stream.getvalue()
 
-        return ("wav", byte_array)
+        if options[tts.ATTR_AUDIO_OUTPUT] == "wav":
+            return ("wav", byte_array)
+        return ("raw", byte_array)
